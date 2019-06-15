@@ -5,22 +5,23 @@ A service for sharing jupyter notebooks with
 - Find-grained ACL 
 - Detailed Audit
 - Awesome Search  
+- Commenting and Discussions
+- Automatic Versioning 
 
 ## Architecture
 
 ```
-                                   (EFS, S3, GCS)
+                                  (EFS, S3, GCS)
                                  +---------------+
                                  |  Persistence  |
                                  +---------------+
-                                  
-+--------------+                 +---------------+                   +----------------+
-|              |    HTTP/JSON    |               |                   |                |
-|              +---------------->+               |     Rendering     |                |
-|  catalog-ui  |                 |  catalog-api  +------------------>+  notebook-api  |
-|              +<--------------->+               |                   |                |
-|              |    WEBSOCKET    |               |                   |                |
-+--------------+                 +---------------+                   +----------------+
++--------------+                 +---------------+                 +----------------+
+|              |    HTTP/JSON    |               |                 |                |
+|              +---------------->+               |  gRPC/ProtoBuf  |                |
+|  catalog-ui  |                 |  catalog-api  +<--------------->+  notebook-api  |
+|              +<--------------->+               |                 |                |
+|              |    WEBSOCKET    |               |                 |                |
++--------------+                 +---------------+                 +----------------+
                         
                        +---------+  +---------+  +---------------+
                        |         |  |         |  |               |

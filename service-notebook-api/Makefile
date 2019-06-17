@@ -54,3 +54,10 @@ run:
 
 	@ FLASK_ENV=development FLASK_APP=main.py flask run
 
+.PHONY: test
+test:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Testing application $(MODULE)"
+	@ echo "-----------------------------------------\n"
+
+	@ py.test
+

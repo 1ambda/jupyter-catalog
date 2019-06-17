@@ -1,0 +1,62 @@
+logging:
+  level:
+    ROOT: INFO
+
+#
+# spring actuactor
+#
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: "ALWAYS"
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  # https://dzone.com/articles/monitoring-using-spring-boot-2-prometheus-and-graf
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  info:
+    git:
+      mode: full
+  health:
+    defaults:
+      enabled: true
+    mail:
+      enabled: false
+
+spring:
+  application:
+    name: Gateway
+
+  main:
+    allow-bean-definition-overriding: true
+
+  profiles:
+    active: local
+
+  flyway:
+    enabled: false
+
+spring.autoconfigure.exclude:
+  - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+  - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+#
+# server
+#
+server:
+  use-forward-headers: true
+  port: ${APPLICATION_PORT:9090}
+  servlet:
+    session:
+      cookie:
+        http-only: true

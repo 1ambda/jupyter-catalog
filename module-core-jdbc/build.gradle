@@ -1,0 +1,44 @@
+def versionValue = file("VERSION").text.trim()
+project.version = versionValue
+
+dependencies {
+    // module
+    // compile project(':module-api-swagger')
+
+    // storage
+    compile('org.flywaydb:flyway-core')
+    runtime('com.h2database:h2')
+    runtime("mysql:mysql-connector-java:${mysqlConnectorVersion}")
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    compileOnly("org.hibernate:hibernate-jpamodelgen:${hibernateModelGenVersion}")
+
+    // session, cache
+    compile('org.springframework.session:spring-session-core')
+    compile('org.springframework.session:spring-session-data-redis')
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+
+    // security
+    compile('org.springframework.boot:spring-boot-starter-security')
+    // compile("org.springframework.data:spring-data-ldap:${springDataLdapVersion}")
+    compile("org.springframework.security:spring-security-oauth2-client")
+    compile("org.springframework.security:spring-security-oauth2-jose")
+    compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
+
+    testCompile('org.springframework.security:spring-security-test')
+}
+
+
+task jarTest(type: Jar) {
+    from sourceSets.test.output
+    classifier = 'test'
+}
+
+configurations {
+    testOutput
+}
+
+artifacts {
+    testOutput jarTest
+}
+

@@ -3,6 +3,8 @@ TAG = "Makefile"
 DOCKER = docker
 DOCKER_HOST_IP := $(shell ipconfig getifaddr en0)
 
+VCS = github.com
+REPOSITORY = "1ambda/jupyter-catalog"
 
 ##
 ## Compose

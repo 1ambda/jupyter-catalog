@@ -1,0 +1,59 @@
+def versionValue = file("VERSION").text.trim()
+project.version = versionValue
+
+apply plugin: "com.google.cloud.tools.jib"
+
+dependencies {
+    compile project(':module-api-swagger')
+    compile project(':module-core-jdbc')
+    testCompile project(path: ':module-core-jdbc', configuration: 'testOutput')
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    // compile "org.zalando:logbook-spring-boot-starter:${logbookVersion}"
+
+    // websocket
+    compile("org.springframework.kafka:spring-kafka:${springKafkaVersion}")
+    compile('org.springframework.boot:spring-boot-starter-websocket')
+    compile('org.springframework.security:spring-security-messaging')
+
+    // spring boot admin
+    compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
+
+    // swagger-springfox
+    compile("io.springfox:springfox-swagger2:${springfoxVersion}")
+    compile("io.springfox:springfox-swagger-ui:${springfoxVersion}")
+
+    // structured logging
+    compile 'net.logstash.logback:logstash-logback-encoder:6.0'
+}
+
+compileTestJava.dependsOn tasks.getByPath(':module-core-jdbc:testClasses')
+
+/**
+ * Jib
+ */
+
+//def ecrAwsAccount = System.getenv("ECR_AWS_ACCOUNT") ?: ""
+//def ecrAwsRegion = System.getenv("ECR_AWS_REGION") ?: ""
+//def ecrAwsRepository = System.getenv("ECR_AWS_REPO") ?: ""
+//def ecrImageTags = System.getenv("TAGS") ?: "latest"
+//
+//jib {
+//    from {
+//        image = 'openjdk:8-jdk-alpine'
+//    }
+//    to {
+//        image = "${ecrAwsAccount}.dkr.ecr.${ecrAwsRegion}.amazonaws.com/${ecrAwsRepository}"
+//        tags = ecrImageTags.split(",")
+//    }
+//    // https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin
+//    container {
+//        // jvmFlags = ['-Xms512m', '-Xdebug', '-Xmy:flag=jib-rules', '-XX:+UseG1GC']
+//        // jvmFlags = ['-Xms512m', '-Xmy:flag=jib-rules', '-XX:+UseG1GC']
+//        jvmFlags = ['-Xms512m', '-XX:+UseG1GC']
+//        mainClass = 'jupyter.catalog.CatalogApplication'
+//        args = []
+//        ports = ['8090']
+//        format = 'OCI'
+//    }
+//}

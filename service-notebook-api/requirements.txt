@@ -1,5 +1,7 @@
 nbformat>=4.3
 nbconvert>=5.5
+ipython==7.5.0
 Flask==1.0.3
-waitress==1.2.1
 requests==2.22.0
+waitress==1.2.1
+Werkzeug==0.15.4

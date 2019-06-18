@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 9090",
+    "serve": "vue-cli-service serve --port 9090 --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "core-js": "^3.1.4",
+    "element-ui": "^2.8.2",
     "vue": "^2.6.10",
+    "vue-awesome": "^3.5.4",
     "vue-class-component": "^7.1.0",
     "vue-property-decorator": "^8.2.1",
     "vue-router": "^3.0.6",

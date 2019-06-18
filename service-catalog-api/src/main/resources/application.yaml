@@ -55,7 +55,7 @@ spring.autoconfigure.exclude:
 #
 server:
   use-forward-headers: true
-  port: ${APPLICATION_PORT:9090}
+  port: ${APPLICATION_PORT:9091}
   servlet:
     session:
       cookie:

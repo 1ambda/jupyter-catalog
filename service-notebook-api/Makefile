@@ -52,7 +52,7 @@ run:
 	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Running application $(MODULE)"
 	@ echo "-----------------------------------------\n"
 
-	@ FLASK_ENV=development FLASK_APP=main.py flask run
+	@ FLASK_RUN_PORT=9092 FLASK_ENV=development FLASK_APP=main.py flask run
 
 .PHONY: test
 test:

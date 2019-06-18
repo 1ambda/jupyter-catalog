@@ -6,6 +6,8 @@ out/
 __pycache__/
 .pytest_cache/
 
+node_modules/
+
 
 ### Gradle ###
 .gradle

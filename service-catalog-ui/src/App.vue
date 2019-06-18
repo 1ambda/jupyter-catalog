@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>
-        <app-navbar></app-navbar>
+      <el-header style="padding: 0;">
+        <navbar-app></navbar-app>
       </el-header>
       <div>
         <router-view></router-view>
@@ -17,7 +17,7 @@
 
   @Component({
     components: {
-      'app-navbar': Navbar,
+      'navbar-app': Navbar,
     },
   })
   export default class App extends Vue {
@@ -27,4 +27,5 @@
 
 <style lang="scss">
   @import './App.scss';
+
 </style>

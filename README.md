@@ -1,5 +1,7 @@
 # jupyter-catalog
 
+[![Build Status](https://travis-ci.com/1ambda/jupyter-catalog.svg?branch=master)](https://travis-ci.com/1ambda/jupyter-catalog)
+
 A service for sharing jupyter notebooks with
 
 - Find-grained ACL 

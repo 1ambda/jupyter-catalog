@@ -40,3 +40,7 @@ body {
 .navbar-search-input .el-input-group__prepend {
   background-color: #fff !important;
 }
+
+.navbar-notification-badge .el-badge__content.el-badge__content--undefined.is-fixed {
+  top: 20px !important;
+}

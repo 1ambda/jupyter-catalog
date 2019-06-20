@@ -4,7 +4,7 @@
       <el-header style="padding: 0;">
         <navbar-app></navbar-app>
       </el-header>
-      <div>
+      <div style="margin-top: 20px;">
         <router-view></router-view>
       </div>
     </el-container>

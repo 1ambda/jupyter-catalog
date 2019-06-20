@@ -4,22 +4,24 @@
       <el-menu mode="horizontal" menu-trigger="click"
                text-color="#303133" class="navbar-menu"
                :default-active="activeNavbarIndex">
-        <el-menu-item index="home"
-                      class="navbar-menu-item">
+        <el-menu-item index="home" class="navbar-menu-item">
           <img src="@/assets/gopher_inclusion_small.png"
-               height="60" width="60" style="padding-left: 7px; padding-right: 2px;">
+               height="57" width="60" style="padding-left: 7px; padding-right: 2px;">
         </el-menu-item>
 
-        <el-menu-item index="notebook"
-                      class="navbar-menu-item">
-          <span class="navbar-menu-item-text">Notebook Registry</span>
+        <el-menu-item index="notebook" class="navbar-menu-item">
+          <span class="navbar-menu-item-text">Notebook</span>
+        </el-menu-item>
+
+        <el-menu-item index="schedule" class="navbar-menu-item">
+          <span class="navbar-menu-item-text">Schedule</span>
         </el-menu-item>
 
         <el-menu-item class="navbar-menu-item">
-          <el-dropdown placement="bottom-end"
+          <el-dropdown placement="top-start"
                        trigger="click">
             <span class="el-dropdown-link navbar-menu-item-text navbar-submenu-item-dropdown-text">
-              Recently Viewed
+              History
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown" class="navbar-menu-item-dropdown-popper">
@@ -33,23 +35,27 @@
               <el-dropdown-item>Notebook: Ad Performance</el-dropdown-item>
               <el-dropdown-item>Notebook: Popular Hotels</el-dropdown-item>
               <el-dropdown-item divided></el-dropdown-item>
-              <el-dropdown-item>Workspace: User - Kun</el-dropdown-item>
-              <el-dropdown-item>Workspace: User - Seho</el-dropdown-item>
+              <el-dropdown-item>User Space: Kun</el-dropdown-item>
+              <el-dropdown-item>User Space: Seho</el-dropdown-item>
               <el-dropdown-item divided></el-dropdown-item>
-              <el-dropdown-item>Workspace: Group - Team Data</el-dropdown-item>
-              <el-dropdown-item>Workspace: Group - Team a-trium</el-dropdown-item>
+              <el-dropdown-item>Group Space: Team Data</el-dropdown-item>
+              <el-dropdown-item>Group Space: Team a-trium</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-menu-item>
 
         <el-menu-item class="navbar-menu-item">
-          <el-input placeholder="Search" suffix-icon="el-icon-search" class="navbar-search-input" autofocus
+          <el-input placeholder="Search"
+                    suffix-icon="el-icon-search"
+                    class="navbar-search-input" autofocus
                     v-model="inputNavbarSearchValue">
             <el-select v-model="optionValueSearchCategory"
                        class="navbar-search-select"
                        slot="prepend" placeholder="Select">
               <el-option label="Notebook" value="1"></el-option>
-              <el-option label="Workspace" value="2"></el-option>
+              <el-option label="User Space" value="2"></el-option>
+              <el-option label="Group Space" value="3"></el-option>
+              <el-option label="Tag" value="4"></el-option>
             </el-select>
           </el-input>
         </el-menu-item>
@@ -61,13 +67,43 @@
           <template slot="title">
             <img :src="stateUserImage" height="35" width="35"
                  class="navbar-username-avatar">
-            <span class="navbar-username-text">{{ stateUsername }}</span>
+            <span class="navbar-username-text">
+              {{ stateUsername }}
+            </span>
           </template>
           <el-menu-item class="navbar-submenu-item">
-            <i class="el-icon-circle-close navbar-submenu-item-icon"></i>
-            <span class="navbar-submenu-item-text">로그아웃</span>
+            <i class="el-icon-setting navbar-submenu-item-icon"></i>
+            <span class="">Setting</span>
+          </el-menu-item>
+          <el-menu-item class="navbar-submenu-item">
+            <i class="el-icon-s-data navbar-submenu-item-icon"></i>
+            <span class="navbar-submenu-item-text">Stat</span>
+          </el-menu-item>
+          <el-menu-item class="navbar-submenu-item">
+            <i class="el-icon-switch-button navbar-submenu-item-icon"></i>
+            <span class="navbar-submenu-item-text">Logout</span>
           </el-menu-item>
         </el-submenu>
+
+
+        <el-menu-item style="float: right;" class="navbar-menu-item navbar-menu-notification">
+          <el-dropdown placement="bottom-end"
+                       trigger="click">
+            <span class="el-dropdown-link">
+              <el-badge :value="100" :max="10" class="navbar-notification-badge">
+                <i class="el-icon-chat-square" style="font-size: 25px;"></i>
+              </el-badge>
+            </span>
+            <el-dropdown-menu slot="dropdown"
+                              class="navbar-notification-dropdown-popper">
+              <el-dropdown-item>Action 1</el-dropdown-item>
+              <el-dropdown-item>Action 2</el-dropdown-item>
+              <el-dropdown-item>Action 3</el-dropdown-item>
+              <el-dropdown-item disabled>Action 4</el-dropdown-item>
+              <el-dropdown-item divided>Action 5</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-menu-item>
 
         <el-menu-item index="admin" style="float: right;" class="navbar-menu-item">
           <span class="navbar-menu-item-text ">
@@ -146,6 +182,10 @@
   .navbar-submenu-item {
   }
 
+  .navbar-submenu-item:hover {
+    background: #ecf5ff !important;
+  }
+
   .navbar-submenu-item-icon {
     padding-left: 10px;
   }
@@ -155,7 +195,7 @@
   }
 
   .navbar-menu-item-dropdown-popper {
-    top: 50px !important;
+    top: 62px !important;
   }
 
   .navbar-submenu-item-dropdown-text {
@@ -205,6 +245,16 @@
     // border: 1px solid rgb(255, 255, 255);
     background-color: rgb(242, 242, 242) !important;
     box-shadow: rgb(235, 235, 235) 0px 0px 0px 1px !important;
+  }
+
+  .navbar-menu-notification {
+    padding-top: 1px;
+    padding-left: 30px;
+    padding-right: 25px;
+  }
+
+  .navbar-notification-dropdown-popper {
+    top: 62px !important;
   }
 
 

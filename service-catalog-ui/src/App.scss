@@ -31,3 +31,12 @@ body {
 }
 
 /* element-ui global */
+
+.navbar-username-popper {
+  position: absolute;
+  top: 60px !important;
+}
+
+.navbar-search-input .el-input-group__prepend {
+  background-color: #fff !important;
+}

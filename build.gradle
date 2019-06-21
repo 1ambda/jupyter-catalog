@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.4.RELEASE'
+        springBootVersion = '2.1.5.RELEASE'
         gradleAptVersion = '0.19'
         owaspVersion = '3.3.1'
         queryDslPluginVersion = '1.0.10'
@@ -10,8 +10,8 @@ buildscript {
         gradleTestLoggerVersion = '1.6.0'
         gradleScalaTestVersion = '0.19'
         gradleVersioningPluginVersion = '2.8.2'
-        lombokPluginVersion = '3.0.0'
-        jibPluginVersion = '1.0.1'
+        lombokPluginVersion = '3.1.0'
+        jibPluginVersion = '1.3.0'
         kotlinPluginVersion = '1.3.30'
     }
 
@@ -141,7 +141,7 @@ allprojects {
         json4sVersion = '3.6.5'
 
         // scala, spark: test
-        junitVersion = '4.12'
+        junitVersion = '5.4.2'
         scalaTestVersion = '3.0.5'
         sparkTestingBaseVersion = '0.11.0'
         // https://mvnrepository.com/artifact/com.holdenkarau/spark-testing-base

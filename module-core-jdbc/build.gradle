@@ -26,6 +26,7 @@ dependencies {
     compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
 
     testCompile('org.springframework.security:spring-security-test')
+    testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
 }
 
 

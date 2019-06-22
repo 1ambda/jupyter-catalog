@@ -1,6 +1,7 @@
 logging:
   level:
     ROOT: INFO
+    web: DEBUG
 
 spring:
   application:
@@ -66,3 +67,11 @@ server:
     session:
       cookie:
         http-only: true
+
+#
+# other micro services
+#
+services:
+  notebook-endpoint: ${SERVICE_NOTEBOOK_ENDPOINT:localhost}
+  notebook-port: ${SERVICE_NOTEBOOK_PORT:9092}
+

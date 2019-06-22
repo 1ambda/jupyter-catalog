@@ -1,0 +1,11 @@
+definitions:
+
+  RenderedNotebookDTO:
+    type: object
+    properties:
+      path:
+        type: string
+        description: Notebook File Path
+      content:
+        type: string
+        description: Notebook Content

@@ -1,12 +1,17 @@
+### IntelliJ ###
 .idea/
 out/
 
+### Python ###
 .direnv/
-
 __pycache__/
 .pytest_cache/
 
+### NodeJS ###
 node_modules/
+
+### OSX ###
+.DS_Store
 
 
 ### Gradle ###

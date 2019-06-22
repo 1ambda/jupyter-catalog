@@ -1,0 +1,12 @@
+{
+  "modelPackage": "jupyter.catalog.swagger.model",
+  "apiPackage": "jupyter.catalog.swagger.server",
+  "basePackage": "jupyter.catalog.swagger",
+  "interfaceOnly": true,
+  "groupId" : "jupyter.catalog",
+  "useTags": true,
+  "useBeanValidation": true,
+  "hideGenerationTimestamp": true,
+  "dateLibrary": "java8",
+  "library": "spring-boot"
+}

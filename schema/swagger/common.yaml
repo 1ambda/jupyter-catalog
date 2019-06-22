@@ -1,0 +1,55 @@
+definitions:
+  Empty:
+    type: object
+    properties:
+      message:
+        type: string
+
+  Failure:
+    type: object
+    properties:
+      timestamp:
+        type: integer
+        format: int64
+        description: Epoch Millis (UTC)
+      status:
+        type: integer
+        format: int32
+        description: Http Status Code
+      code:
+        type: integer
+        format: int32
+        description: Internal Error Code
+      message:
+        type: string
+        description: First Error Message
+      messages:
+        type: array
+        items:
+          type: string
+        description: All Error Messages
+      type:
+        type: string
+        description: Error Type (e.g. Exception Class in Java)
+      path:
+        type: string
+        description: API Path (URI)
+      stacktrace:
+        type: string # stacktrace
+
+  Pagination:
+    type: object
+    required:
+      - itemCountPerPage  # limit
+      - currentPageOffset # offset
+      - totalItemCount    # searchCount
+    properties:
+      itemCountPerPage:
+        type: integer
+        format: int32
+      currentPageOffset:
+        type: integer
+        format: int32
+      totalItemCount:
+        type: integer
+        format: int64

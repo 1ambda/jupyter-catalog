@@ -20,7 +20,6 @@ dependencies {
 
     // security
     compile('org.springframework.boot:spring-boot-starter-security')
-    // compile("org.springframework.data:spring-data-ldap:${springDataLdapVersion}")
     compile("org.springframework.security:spring-security-oauth2-client")
     compile("org.springframework.security:spring-security-oauth2-jose")
     compile("io.jsonwebtoken:jjwt:${jjwtVersion}")

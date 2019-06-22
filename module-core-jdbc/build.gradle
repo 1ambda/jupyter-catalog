@@ -3,7 +3,7 @@ project.version = versionValue
 
 dependencies {
     // module
-    // compile project(':module-api-swagger')
+    compile project(':module-common')
 
     // storage
     compile('org.flywaydb:flyway-core')
@@ -24,6 +24,7 @@ dependencies {
     compile("org.springframework.security:spring-security-oauth2-jose")
     compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
 
+    // test
     testCompile('org.springframework.security:spring-security-test')
     testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
 }

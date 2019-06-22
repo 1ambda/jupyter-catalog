@@ -4,19 +4,20 @@
 
 A service for sharing jupyter notebooks with
 
-- Find-grained ACL 
+- Fine-grained ACL 
 - Detailed Audit
-- Awesome Search  
-- Commenting and Discussions
+- Awesome Search and Curation 
+- Delightful Commenting and Discussions
 - Automatic Versioning 
+- Parameterizing and Scheduling Notebooks
 
 ## Architecture
 
 ```
-                                  (EFS, S3, GCS)
-                                 +---------------+
-                                 |  Persistence  |
-                                 +---------------+
+                                                                     (EFS, S3, GCS)
+                                                                   +----------------+
+                                                                   |  Persistence   |
+                                                                   +----------------+
 +--------------+                 +---------------+                 +----------------+
 |              |    HTTP/JSON    |               |                 |                |
 |              +---------------->+               |  gRPC/ProtoBuf  |                |

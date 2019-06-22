@@ -25,6 +25,7 @@ install.tool:
 ##
 ## Swagger
 ##
+
 .PHONY: swagger.client-api
 swagger.client-api:
 	@ cd module-api-swagger && make swagger

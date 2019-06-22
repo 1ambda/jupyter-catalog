@@ -5,7 +5,9 @@ apply plugin: "com.google.cloud.tools.jib"
 
 dependencies {
     compile project(':module-common')
+    compile project(':module-api-swagger')
     compile project(':module-core-jdbc')
+    
     testCompile project(path: ':module-core-jdbc', configuration: 'testOutput')
 
     compile 'org.springframework.boot:spring-boot-starter-web'
@@ -25,6 +27,9 @@ dependencies {
 
     // structured logging
     compile 'net.logstash.logback:logstash-logback-encoder:6.0'
+
+    // test
+    testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
 }
 
 compileTestJava.dependsOn tasks.getByPath(':module-core-jdbc:testClasses')

@@ -1,4 +1,4 @@
-package jupyter.catalog.swagger.model;
+package jupyter.catalog.generated.swagger.model;
 
 import java.util.Objects;
 import java.util.Arrays;

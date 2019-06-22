@@ -1,4 +1,4 @@
-package jupyter.catalog.swagger.model;
+package jupyter.catalog.generated.swagger.model;
 
 import java.util.Objects;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import jupyter.catalog.swagger.model.Provider;
+import jupyter.catalog.generated.swagger.model.Provider;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;

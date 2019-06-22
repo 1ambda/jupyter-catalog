@@ -22,8 +22,8 @@ A service for sharing jupyter notebooks with
 |              |    HTTP/JSON    |               |                 |                |
 |              +---------------->+               |  gRPC/ProtoBuf  |                |
 |  catalog-ui  |                 |  catalog-api  +<--------------->+  notebook-api  |
-|              +<--------------->+               |                 |                |
-|              |    WEBSOCKET    |               |                 |                |
+|              +<--------------->+               |    Display      |                |
+|              |    WEBSOCKET    |               |    Schedule     |                |
 +--------------+                 +---------------+                 +----------------+
                         
                        +---------+  +---------+  +---------------+

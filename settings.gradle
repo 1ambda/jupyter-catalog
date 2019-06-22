@@ -1,4 +1,6 @@
 rootProject.name = "jupyter-catalog"
 include ':module-common',
+        ':module-api-swagger',
+        ':module-api-grpc', 
         ':module-core-jdbc',
         ':service-catalog-api'

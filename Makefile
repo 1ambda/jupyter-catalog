@@ -6,13 +6,47 @@ DOCKER_HOST_IP := $(shell ipconfig getifaddr en0)
 VCS = github.com
 REPOSITORY = "1ambda/jupyter-catalog"
 
+SWAGGER_CODEGEN_VERSION = 2.4.5
+
+
+
+##
+## Tool
+##
+
+.PHONY: install.tool
+install.tool:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Installing prerequisites"
+	@ wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VERSION)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VERSION).jar -O script/swagger-codegen/swagger-codegen-cli.jar
+
+#	@ pip install mycli
+#	@ go get -u -v github.com/holys/redis-cli
+
+##
+## Swagger
+##
+.PHONY: swagger.api-swagger
+swagger.api:
+	@ cd module-api-swagger && make swagger
+
+.PHONY: swagger.catalog-api
+swagger.server:
+	@ cd service-catalog-api && make swagger
+
+#.PHONY: swagger.catalog-ui
+#swagger.client:
+#	@ cd service-catalog-ui && make swagger
+
+.PHONY: swagger
+swagger: swagger.api swagger.server # swagger.client
+
 ##
 ## Compose
 ##
 
 .PHONY: compose.prepare
 compose.prepare:
-	@ echo "[$(TAG)] ($(shell TZ=UTC date -u '+%H:%M:%S')) - Preparing docker-compose"
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Preparing docker-compose"
 	@ echo "-----------------------------------------\n"
 	@ echo "export DOCKER_HOST_IP=$(DOCKER_HOST_IP)"
 	@ echo "\n-----------------------------------------"
@@ -20,7 +54,7 @@ compose.prepare:
 
 .PHONY: compose
 compose: compose.prepare
-	@ echo "[$(TAG)] ($(shell TZ=UTC date -u '+%H:%M:%S')) - Running docker-compose"
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Running docker-compose"
 	@ docker stop $(docker ps -a -q) || true
 	@ docker rm -f $(docker ps -a -q) || true
 	@ docker volume rm $(docker volume ls -f dangling=true -q) || true
@@ -31,7 +65,7 @@ compose: compose.prepare
 
 .PHONY: compose.clean
 compose.clean:
-	@ echo "[$(TAG)] ($(shell TZ=UTC date -u '+%H:%M:%S')) - Starting: Cleaning docker resources"
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Starting: Cleaning docker resources"
 	@ echo "-----------------------------------------\n"
 	@ docker stop `docker ps -a -q` || true
 	@ docker rm -f `docker ps -a -q` || true
@@ -50,11 +84,11 @@ compose.clean:
 
 .PHONY: mysql
 mysql:
-	@ echo "[$(TAG)] ($(shell TZ=UTC date -u '+%H:%M:%S')) - Connecting to mysql"
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Connecting to mysql"
 	@ $(MYSQLCLIENT) -u root -h localhost application -p root
 
 .PHONY: redis
 redis:
-	@ echo "[$(TAG)] ($(shell TZ=UTC date -u '+%H:%M:%S')) - Connecting to redis"
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Connecting to redis"
 	@ redis-cli -a credential
 

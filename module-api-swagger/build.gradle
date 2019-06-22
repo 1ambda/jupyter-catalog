@@ -1,0 +1,25 @@
+def versionValue = file("VERSION").text.trim()
+project.version = versionValue
+
+apply plugin: 'io.franzbecker.gradle-lombok'
+
+dependencies {
+    // swagger-client
+    compile("javax.validation:validation-api:${javaxValidationVersion}")
+    compile("io.swagger:swagger-annotations:${swaggerAnnotationVersion}")
+    compile "io.github.openfeign:feign-core:${feignVersion}"
+    compile "io.github.openfeign:feign-jackson:${feignVersion}"
+    compile "io.github.openfeign:feign-slf4j:${feignVersion}"
+    compile "io.github.openfeign.form:feign-form:${feignFormVersion}"
+    compile "com.brsanthu:migbase64:${migbase64Version}"
+    compile "org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:${oltuVersion}"
+
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonJsr310Version}")
+
+    // test
+    testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
+
+    // code generation
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompile("org.projectlombok:lombok:${lombokVersion}")
+}

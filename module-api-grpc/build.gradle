@@ -1,0 +1,9 @@
+def versionValue = file("VERSION").text.trim()
+project.version = versionValue
+
+apply plugin: 'io.franzbecker.gradle-lombok'
+
+dependencies {
+    // code generation
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompile("org.projectlombok:lombok:${lombokVersion}")}

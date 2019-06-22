@@ -13,6 +13,10 @@ node_modules/
 ### OSX ###
 .DS_Store
 
+### Swagger ###
+.swagger-codegen/
+swagger-codegen-cli.jar
+
 
 ### Gradle ###
 .gradle

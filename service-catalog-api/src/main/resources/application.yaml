@@ -22,8 +22,8 @@ spring.autoconfigure.exclude:
 
 spring.security:
   user:
-    name: ${SYSTEM_USERNAME:admin}
-    password: ${SYSTEM_PASSWORD:admin}
+    name: ${SYSTEM_USERNAME:system}
+    password: ${SYSTEM_PASSWORD:system}
     roles: SYSTEM
 
 #

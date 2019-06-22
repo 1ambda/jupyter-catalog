@@ -1,0 +1,39 @@
+api:
+  display:
+    get:
+      tags:
+        - display-controller
+      operationId: displayNotebook
+      consumes: []
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: path
+          type: string
+          description: Notebook Path
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "./notebook-display-model.yaml#/definitions/RenderedNotebookDTO"
+        400:
+          description: Bad Request
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        404:
+          description: Not Found
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"

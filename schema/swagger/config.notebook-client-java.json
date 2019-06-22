@@ -1,0 +1,13 @@
+{
+  "modelPackage" : "jupyter.notebook.generated.swagger.model",
+  "apiPackage": "jupyter.notebook.generated.swagger.client.api",
+  "invokerPackage" : "jupyter.notebook.generated.swagger.client.invoker",
+  "configPackage" : "jupyter.notebook.generated.swagger.client.config",
+  "basePackage" : "jupyter.notebook.generated.swagger.client",
+  "groupId" : "jupyter.notebook",
+  "useTags"  : true,
+  "useBeanValidation": true,
+  "hideGenerationTimestamp": true,
+  "dateLibrary" : "java8",
+  "library" : "feign"
+}

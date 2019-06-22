@@ -1,7 +1,7 @@
 {
-  "modelPackage": "jupyter.catalog.swagger.model",
-  "apiPackage": "jupyter.catalog.swagger.server",
-  "basePackage": "jupyter.catalog.swagger",
+  "modelPackage": "jupyter.catalog.generated.swagger.model",
+  "apiPackage": "jupyter.catalog.generated.swagger.server.api",
+  "basePackage": "jupyter.catalog.generated.swagger",
   "interfaceOnly": true,
   "groupId" : "jupyter.catalog",
   "useTags": true,

@@ -1,0 +1,9 @@
+definitions:
+
+  RenderedNotebookDTO:
+    type: object
+    properties:
+      content:
+        type: string
+      path:
+        type: string

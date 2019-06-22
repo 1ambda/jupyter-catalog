@@ -26,10 +26,15 @@ dependencies {
     compile("io.springfox:springfox-swagger-ui:${springfoxVersion}")
 
     // structured logging
-    compile 'net.logstash.logback:logstash-logback-encoder:6.0'
+    compile("net.logstash.logback:logstash-logback-encoder:${logbackEncoderVersion}")
+
+    // logging
+    compile("ch.qos.logback:logback-classic:${logbackVersion}")
 
     // test
     testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
+    testCompile("org.assertj:assertj-core:${assertJVersion}")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
 }
 
 compileTestJava.dependsOn tasks.getByPath(':module-core-jdbc:testClasses')

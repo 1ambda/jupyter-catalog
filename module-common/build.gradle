@@ -4,8 +4,13 @@ project.version = versionValue
 apply plugin: 'io.franzbecker.gradle-lombok'
 
 dependencies {
+    // logging
+    compile("ch.qos.logback:logback-classic:${logbackVersion}")
+
     // test
     testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
+    testCompile("org.assertj:assertj-core:${assertJVersion}")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
     
     // code generation
     compileOnly("org.projectlombok:lombok:${lombokVersion}")

@@ -4,6 +4,8 @@ project.version = versionValue
 apply plugin: 'io.franzbecker.gradle-lombok'
 
 dependencies {
+    compile project(':module-common')
+
     // swagger-client
     compile("javax.validation:validation-api:${javaxValidationVersion}")
     compile("io.swagger:swagger-annotations:${swaggerAnnotationVersion}")
@@ -13,11 +15,15 @@ dependencies {
     compile "io.github.openfeign.form:feign-form:${feignFormVersion}"
     compile "com.brsanthu:migbase64:${migbase64Version}"
     compile "org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:${oltuVersion}"
-
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonJsr310Version}")
+
+    // logging
+    compile("ch.qos.logback:logback-classic:${logbackVersion}")
 
     // test
     testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
+    testCompile("org.assertj:assertj-core:${assertJVersion}")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
 
     // code generation
     compileOnly("org.projectlombok:lombok:${lombokVersion}")

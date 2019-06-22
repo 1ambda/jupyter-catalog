@@ -24,9 +24,13 @@ dependencies {
     compile("org.springframework.security:spring-security-oauth2-jose")
     compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
 
+    // logging
+    compile("ch.qos.logback:logback-classic:${logbackVersion}")
+
     // test
-    testCompile('org.springframework.security:spring-security-test')
     testCompile("org.junit.jupiter:junit-jupiter:${junitVersion}")
+    testCompile("org.assertj:assertj-core:${assertJVersion}")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
 }
 
 

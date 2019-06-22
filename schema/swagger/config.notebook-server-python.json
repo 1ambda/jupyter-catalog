@@ -1,0 +1,11 @@
+{
+  "sortParamsByRequiredFlag": false,
+  "ensureUniqueParams": true,
+  "allowUnicodeIdentifiers": false,
+  "prependFormOrBodyParameters": false,
+  "packageName": "generated_swagger",
+  "controllerPackage": "controllers",
+  "defaultController": "default_controller",
+  "supportPython2": false,
+  "serverPort": 9092
+}

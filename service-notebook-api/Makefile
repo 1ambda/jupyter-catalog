@@ -3,6 +3,57 @@ TAG = "Makefile"
 MODULE = service-notebook-api
 PYTHON_VERSION = 3.7.2
 
+SWAGGER_DIR = ../schema/swagger
+SWAGGER_SCHEMA = "$(SWAGGER_DIR)/notebook-entrypoint.yaml"
+SWAGGER_SERVER_CONFIG = "$(SWAGGER_DIR)/config.notebook-server-python.json"
+SWAGGER_SERVER_PACKAGE = "generated_swagger"
+SWAGGER_SERVER_OUTPUT_DIR = "src/$(SWAGGER_SERVER_PACKAGE)"
+SWAGGER_SERVER_OUTPUT_TEMP_DIR = ".swagger-codegen"
+
+SWAGGER_CODEGEN_JAR=../script/swagger-codegen/swagger-codegen-cli.jar
+
+##
+## Swagger
+##
+
+.PHONY: swagger.clean
+swagger.clean:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: cleaning generated swagger files"
+	@ echo "-----------------------------------------\n"
+
+	rm -rf $(SWAGGER_SERVER_OUTPUT_DIR)
+	mkdir -p src/generated_swagger/spec || true
+
+	@ echo "\n-----------------------------------------"
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Finished: cleaning generated swagger files"
+	@ echo ""
+	@ echo ""
+
+.PHONY: swagger.server
+swagger.server:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: generating swagger server files"
+	@ echo "-----------------------------------------\n"
+
+	@ java -jar $(SWAGGER_CODEGEN_JAR) generate -l python-flask -i $(SWAGGER_SCHEMA) -c $(SWAGGER_SERVER_CONFIG) -o $(SWAGGER_SERVER_OUTPUT_TEMP_DIR)
+	mv $(SWAGGER_SERVER_OUTPUT_TEMP_DIR)/$(SWAGGER_SERVER_PACKAGE)/models $(SWAGGER_SERVER_OUTPUT_DIR)/models
+	mv $(SWAGGER_SERVER_OUTPUT_TEMP_DIR)/$(SWAGGER_SERVER_PACKAGE)/encoder.py $(SWAGGER_SERVER_OUTPUT_DIR)/
+	mv $(SWAGGER_SERVER_OUTPUT_TEMP_DIR)/$(SWAGGER_SERVER_PACKAGE)/util.py $(SWAGGER_SERVER_OUTPUT_DIR)/
+
+	# replace swagger.yaml controller directory using 'sed 's/abc/XYZ/g' <infile >outfile'
+	sed 's/generated_swagger.controllers/controller_swagger/g' <$(SWAGGER_SERVER_OUTPUT_TEMP_DIR)/$(SWAGGER_SERVER_PACKAGE)/swagger/swagger.yaml >$(SWAGGER_SERVER_OUTPUT_DIR)/spec/swagger.yaml
+
+	@ echo "\n-----------------------------------------"
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Finished: generating swagger server files"
+	@ echo ""
+	@ echo ""
+
+.PHONY: swagger
+swagger: swagger.clean swagger.server
+
+##
+## Tool
+##
+
 .PHONY: tools.install
 tools.install:
 	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Installing tools"
@@ -33,6 +84,10 @@ tools.pyenv-create:
 
 	@ pyenv activate jupyter-catalog
 
+##
+## Dependency
+##
+
 .PHONY: dependency.install
 dependency.install:
 	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Installing pip dependencies"
@@ -46,6 +101,10 @@ dependency.list:
 	@ echo "-----------------------------------------\n"
 
 	@ pip freeze
+
+##
+## Development
+##
 
 .PHONY: run
 run:

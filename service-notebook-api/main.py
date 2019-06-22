@@ -6,7 +6,7 @@ app = Flask(__name__)
 handler = ExceptionHandler(app)
 
 
-@app.route('/api/notebook/render', methods=['GET', ])
+@app.route('/api/notebook/display', methods=['GET', ])
 def render_notebook():
     file_path = request.args.get("path")
 

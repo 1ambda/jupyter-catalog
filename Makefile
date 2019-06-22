@@ -25,20 +25,20 @@ install.tool:
 ##
 ## Swagger
 ##
-.PHONY: swagger.api-swagger
-swagger.api:
+.PHONY: swagger.client-api
+swagger.client-api:
 	@ cd module-api-swagger && make swagger
 
 .PHONY: swagger.catalog-api
-swagger.server:
+swagger.catalog-api:
 	@ cd service-catalog-api && make swagger
 
-#.PHONY: swagger.catalog-ui
-#swagger.client:
-#	@ cd service-catalog-ui && make swagger
+.PHONY: swagger.catalog-ui
+swagger.catalog-ui:
+	@ cd service-catalog-ui && make swagger
 
 .PHONY: swagger
-swagger: swagger.api swagger.server # swagger.client
+swagger: swagger.client-api swagger.catalog-api swagger.catalog-ui
 
 ##
 ## Compose

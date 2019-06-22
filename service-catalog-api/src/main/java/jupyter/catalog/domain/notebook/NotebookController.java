@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponses;
 import jupyter.catalog.generated.swagger.model.Failure;
 import jupyter.catalog.generated.swagger.model.RenderedNotebookDTO;
 import jupyter.catalog.generated.swagger.server.api.NotebookControllerApi;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,7 @@ public class NotebookController implements NotebookControllerApi {
     @Override
     public ResponseEntity<RenderedNotebookDTO> displayNotebook() {
 
-
-        return null;
+        val dto = notebookBridge.handleDisplayNotebook();
+        return ResponseEntity.ok(dto);
     }
 }

@@ -2,6 +2,7 @@ package jupyter.catalog.domain.notebook;
 
 import feign.Logger;
 import jupyter.catalog.config.ProfileConfigService;
+import jupyter.catalog.generated.swagger.model.RenderedNotebookDTO;
 import jupyter.common.SwaggerClientApi;
 import jupyter.notebook.generated.swagger.client.api.DisplayControllerApi;
 import lombok.val;
@@ -30,5 +31,18 @@ public class NotebookBridge {
                 Logger.Level.BASIC);
 
         return client;
+    }
+
+    public RenderedNotebookDTO handleDisplayNotebook() {
+        val path = "asset/notebook/1ambda/hello_world.ipynb";
+        val client = buildDisplayApiClient();
+        val response = client.displayNotebook(path);
+
+        val dto = RenderedNotebookDTO.builder()
+                .content(response.getContent())
+                .path(response.getPath())
+                .build();
+
+        return dto;
     }
 }

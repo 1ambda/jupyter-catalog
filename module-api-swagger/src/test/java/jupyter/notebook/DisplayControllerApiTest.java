@@ -4,7 +4,7 @@ package jupyter.notebook;
 import feign.Logger;
 import feign.RetryableException;
 import jupyter.common.exception.BadRequestException;
-import jupyter.notebook.common.SwaggerClientApi;
+import jupyter.common.SwaggerClientApi;
 import jupyter.notebook.generated.swagger.client.api.DisplayControllerApi;
 import jupyter.notebook.generated.swagger.model.RenderedNotebookDTO;
 import lombok.val;

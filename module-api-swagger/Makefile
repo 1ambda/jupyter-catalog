@@ -7,49 +7,90 @@ VERSION			= $(shell cat ./VERSION)
 VCS = github.com
 REPOSITORY = 1ambda/jupyter-catalog
 MODULE = module-api-swagger
-PACKAGE = "jupyter/notebook/generated"
 
 SWAGGER_DIR = ../schema/swagger
 SWAGGER_TEMPLATE_DIR = "${SWAGGER_DIR}/template-model-java"
-SWAGGER_SCHEMA = "$(SWAGGER_DIR)/notebook-entrypoint.yaml"
-SWAGGER_CLIENT_CONFIG = "$(SWAGGER_DIR)/config.notebook-client-java.json"
+
+PACKAGE_NOTEBOOK = "jupyter/notebook/generated"
+SWAGGER_NOTEBOOK_SCHEMA = "$(SWAGGER_DIR)/notebook-entrypoint.yaml"
+SWAGGER_NOTEBOOK_CLIENT_CONFIG = "$(SWAGGER_DIR)/config.notebook-client-java.json"
+
+SWAGGER_NOTEBOOK_OUTPUT_DIR = "src/main/java/$(PACKAGE_NOTEBOOK)/swagger"
+SWAGGER_NOTEBOOK_CLIENT_OUTPUT_GEN_DIR = "$(SWAGGER_OUTPUT_TEMP_DIR)/src/main/java/$(PACKAGE_NOTEBOOK)/swagger/client"
+SWAGGER_NOTEBOOK_CLIENT_OUTPUT_DIR = "src/main/java/$(PACKAGE_NOTEBOOK)/swagger/client"
+SWAGGER_NOTEBOOK_MODEL_OUTPUT_GEN_DIR = "$(SWAGGER_OUTPUT_TEMP_DIR)/src/main/java/$(PACKAGE_NOTEBOOK)/swagger/model"
+SWAGGER_NOTEBOOK_MODEL_OUTPUT_DIR = "src/main/java/$(PACKAGE_NOTEBOOK)/swagger/model"
+
+PACKAGE_CATALOG = "jupyter/catalog/generated"
+SWAGGER_CATALOG_SCHEMA = "$(SWAGGER_DIR)/catalog-entrypoint.yaml"
+SWAGGER_CATALOG_CLIENT_CONFIG = "$(SWAGGER_DIR)/config.catalog-client-java.json"
+
+SWAGGER_CATALOG_OUTPUT_DIR = "src/main/java/$(PACKAGE_CATALOG)/swagger"
+SWAGGER_CATALOG_CLIENT_OUTPUT_GEN_DIR = "$(SWAGGER_OUTPUT_TEMP_DIR)/src/main/java/$(PACKAGE_CATALOG)/swagger/client"
+SWAGGER_CATALOG_CLIENT_OUTPUT_DIR = "src/main/java/$(PACKAGE_CATALOG)/swagger/client"
+SWAGGER_CATALOG_MODEL_OUTPUT_GEN_DIR = "$(SWAGGER_OUTPUT_TEMP_DIR)/src/main/java/$(PACKAGE_CATALOG)/swagger/model"
+SWAGGER_CATALOG_MODEL_OUTPUT_DIR = "src/main/java/$(PACKAGE_CATALOG)/swagger/model"
+
 SWAGGER_OUTPUT_TEMP_DIR = ".swagger-codegen"
-SWAGGER_OUTPUT_DIR = "src/main/java/$(PACKAGE)/swagger"
-SWAGGER_CLIENT_OUTPUT_GEN_DIR = "$(SWAGGER_OUTPUT_TEMP_DIR)/src/main/java/$(PACKAGE)/swagger/client"
-SWAGGER_CLIENT_OUTPUT_DIR = "src/main/java/$(PACKAGE)/swagger/client"
-SWAGGER_MODEL_OUTPUT_GEN_DIR = "$(SWAGGER_OUTPUT_TEMP_DIR)/src/main/java/$(PACKAGE)/swagger/model"
-SWAGGER_MODEL_OUTPUT_DIR = "src/main/java/$(PACKAGE)/swagger/model"
 
 SWAGGER_CODEGEN_JAR=../script/swagger-codegen/swagger-codegen-cli.jar
 
-.PHONY: swagger.clean
-swagger.clean:
-	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: cleaning generated swagger files"
+.PHONY: swagger.clean-notebook
+swagger.clean-notebook:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: cleaning generated swagger files (NOTEBOOK)"
 	@ echo "-----------------------------------------\n"
 
 	rm -rf $(SWAGGER_OUTPUT_TEMP_DIR)
-	rm -rf $(SWAGGER_OUTPUT_DIR)
-	mkdir -p $(SWAGGER_OUTPUT_DIR)
+	rm -rf $(SWAGGER_NOTEBOOK_OUTPUT_DIR)
+	mkdir -p $(SWAGGER_NOTEBOOK_OUTPUT_DIR)
 
 	@ echo "\n-----------------------------------------"
-	@ echo "[$(TAG)] ($$(date -u '+%H:%M:%S')) - Finished: cleaning generated swagger files"
+	@ echo "[$(TAG)] ($$(date -u '+%H:%M:%S')) - Finished: cleaning generated swagger files (NOTEBOOK)"
 	@ echo ""
 	@ echo ""
 
-.PHONY: swagger.client
-swagger.client:
-	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: generating swagger client files"
+.PHONY: swagger.client-notebook
+swagger.client-notebook:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: generating swagger client files (NOTEBOOK)"
 	@ echo "-----------------------------------------\n"
 
-	@ java -jar $(SWAGGER_CODEGEN_JAR) generate -l java -i $(SWAGGER_SCHEMA) -c $(SWAGGER_CLIENT_CONFIG) -t $(SWAGGER_TEMPLATE_DIR) -o $(SWAGGER_OUTPUT_TEMP_DIR)
-	@ mv $(SWAGGER_CLIENT_OUTPUT_GEN_DIR) $(SWAGGER_CLIENT_OUTPUT_DIR)
-	@ mv $(SWAGGER_MODEL_OUTPUT_GEN_DIR) $(SWAGGER_MODEL_OUTPUT_DIR)
+	@ java -jar $(SWAGGER_CODEGEN_JAR) generate -l java -i $(SWAGGER_NOTEBOOK_SCHEMA) -c $(SWAGGER_NOTEBOOK_CLIENT_CONFIG) -t $(SWAGGER_TEMPLATE_DIR) -o $(SWAGGER_OUTPUT_TEMP_DIR)
+	@ mv $(SWAGGER_NOTEBOOK_CLIENT_OUTPUT_GEN_DIR) $(SWAGGER_NOTEBOOK_CLIENT_OUTPUT_DIR)
+	@ mv $(SWAGGER_NOTEBOOK_MODEL_OUTPUT_GEN_DIR) $(SWAGGER_NOTEBOOK_MODEL_OUTPUT_DIR)
 
 	@ echo "\n-----------------------------------------"
-	@ echo "[$(TAG)] ($$(date -u '+%H:%M:%S')) - Finished: generating swagger client files"
+	@ echo "[$(TAG)] ($$(date -u '+%H:%M:%S')) - Finished: generating swagger client files (NOTEBOOK)"
 	@ echo ""
 	@ echo ""
 
+.PHONY: swagger.clean-catalog
+swagger.clean-catalog:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: cleaning generated swagger files (CATALOG)"
+	@ echo "-----------------------------------------\n"
+
+	rm -rf $(SWAGGER_OUTPUT_TEMP_DIR)
+	rm -rf $(SWAGGER_CATALOG_OUTPUT_DIR)
+	mkdir -p $(SWAGGER_CATALOG_OUTPUT_DIR)
+
+	@ echo "\n-----------------------------------------"
+	@ echo "[$(TAG)] ($$(date -u '+%H:%M:%S')) - Finished: cleaning generated swagger files (CATALOG)"
+	@ echo ""
+	@ echo ""
+
+.PHONY: swagger.client-catalog
+swagger.client-catalog:
+	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: generating swagger client files (CATALOG)"
+	@ echo "-----------------------------------------\n"
+
+	@ java -jar $(SWAGGER_CODEGEN_JAR) generate -l java -i $(SWAGGER_CATALOG_SCHEMA) -c $(SWAGGER_CATALOG_CLIENT_CONFIG) -t $(SWAGGER_TEMPLATE_DIR) -o $(SWAGGER_OUTPUT_TEMP_DIR)
+	@ mv $(SWAGGER_CATALOG_CLIENT_OUTPUT_GEN_DIR) $(SWAGGER_CATALOG_CLIENT_OUTPUT_DIR)
+	@ mv $(SWAGGER_CATALOG_MODEL_OUTPUT_GEN_DIR) $(SWAGGER_CATALOG_MODEL_OUTPUT_DIR)
+
+	@ echo "\n-----------------------------------------"
+	@ echo "[$(TAG)] ($$(date -u '+%H:%M:%S')) - Finished: generating swagger client files (CATALOG)"
+	@ echo ""
+	@ echo ""
 
 .PHONY: swagger
-swagger: swagger.clean swagger.client
+swagger: swagger.clean-notebook swagger.client-notebook \
+	 swagger.clean-catalog swagger.client-catalog

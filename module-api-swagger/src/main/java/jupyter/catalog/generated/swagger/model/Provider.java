@@ -2,7 +2,6 @@ package jupyter.catalog.generated.swagger.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonValue;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;

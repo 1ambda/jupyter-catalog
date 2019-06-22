@@ -1,4 +1,4 @@
-package jupyter.notebook.common;
+package jupyter.common;
 
 import feign.Feign;
 import feign.Logger;

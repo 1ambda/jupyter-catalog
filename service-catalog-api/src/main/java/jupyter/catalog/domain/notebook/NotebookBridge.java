@@ -2,7 +2,7 @@ package jupyter.catalog.domain.notebook;
 
 import feign.Logger;
 import jupyter.catalog.config.ProfileConfigService;
-import jupyter.notebook.common.SwaggerClientApi;
+import jupyter.common.SwaggerClientApi;
 import jupyter.notebook.generated.swagger.client.api.DisplayControllerApi;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;

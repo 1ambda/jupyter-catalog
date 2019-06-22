@@ -15,7 +15,7 @@ def render_notebook():
         notebook_rendered = render_html(notebook_content)
     except Exception as e:
         json_error = ExceptionHandler().std_handler(e)
-        return make_response(json_error, 500)
+        return make_response(json_error, 400)
 
     return make_response(jsonify({
         'path': file_path,

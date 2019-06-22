@@ -4,7 +4,7 @@ project.version = versionValue
 apply plugin: "com.google.cloud.tools.jib"
 
 dependencies {
-    compile project(':module-api-swagger')
+    compile project(':module-common')
     compile project(':module-core-jdbc')
     testCompile project(path: ':module-core-jdbc', configuration: 'testOutput')
 

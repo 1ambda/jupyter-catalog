@@ -39,7 +39,7 @@ A service for sharing jupyter notebooks with
 
 ## Supported Persistence 
 
-Available notebook repository layers
+Available Notebook Repository Layers
 
 - File System (NFS, EFS, ...)
 - S3

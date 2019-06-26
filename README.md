@@ -44,3 +44,9 @@ Available Notebook Repository Layers
 - File System (NFS, EFS, ...)
 - S3
 - GCS 
+
+## Credits
+
+Gopher logo from [ashleymcnamara/gophers](https://github.com/ashleymcnamara/gophers)
+
+Licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/) 

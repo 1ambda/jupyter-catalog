@@ -8,8 +8,6 @@ REPOSITORY = "1ambda/jupyter-catalog"
 
 SWAGGER_CODEGEN_VERSION = 2.4.5
 
-
-
 ##
 ## Tool
 ##
@@ -86,7 +84,7 @@ compose.clean:
 .PHONY: mysql
 mysql:
 	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Connecting to mysql"
-	@ $(MYSQLCLIENT) -u root -h localhost application -p root
+	@ mycli -u root -h localhost application -p root
 
 .PHONY: redis
 redis:

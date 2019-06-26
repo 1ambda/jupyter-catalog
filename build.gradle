@@ -112,6 +112,8 @@ allprojects {
         // storage, repository
         prestoVersion = '0.206'
         mysqlConnectorVersion = '8.0.13'
+        h2Version = '1.4.199'
+        flywayVersion = '5.2.4'
         springKafkaVersion = '2.2.0.RELEASE'
         springDataLdapVersion = '2.1.6.RELEASE'
 

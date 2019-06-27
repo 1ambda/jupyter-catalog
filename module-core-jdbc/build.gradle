@@ -6,8 +6,8 @@ dependencies {
     compile project(':module-common')
 
     // storage
-    compile('org.flywaydb:flyway-core')
-    runtime('com.h2database:h2')
+    compile("org.flywaydb:flyway-core:${flywayVersion}")
+    runtime("com.h2database:h2:${h2Version}")
     runtime("mysql:mysql-connector-java:${mysqlConnectorVersion}")
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
 

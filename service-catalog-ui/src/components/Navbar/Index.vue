@@ -17,6 +17,10 @@
           <span class="navbar-menu-item-text">Schedule</span>
         </el-menu-item>
 
+        <el-menu-item index="dataset" class="navbar-menu-item">
+          <span class="navbar-menu-item-text">Dataset</span>
+        </el-menu-item>
+
         <el-menu-item class="navbar-menu-item">
           <el-dropdown placement="top-start"
                        trigger="click">

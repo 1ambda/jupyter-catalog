@@ -5,9 +5,12 @@ import java.util.TimeZone;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import jupyter.core.jdbc.CoreJdbcReference;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
+@Import(value = {CoreJdbcReference.class,})
 @SpringBootApplication
 public class CatalogApplication {
 

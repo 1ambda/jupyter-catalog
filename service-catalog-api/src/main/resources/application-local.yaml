@@ -1,0 +1,43 @@
+logging:
+  level:
+    ROOT: INFO
+    web: DEBUG
+
+    # application
+    jupyter.catalog: DEBUG
+
+spring:
+  profiles:
+    include: jdbc-local
+
+#
+# spring actuactor
+#
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: "ALWAYS"
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  # https://dzone.com/articles/monitoring-using-spring-boot-2-prometheus-and-graf
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  info:
+    git:
+      mode: full
+  health:
+    defaults:
+      enabled: true
+    mail:
+      enabled: false
+
+

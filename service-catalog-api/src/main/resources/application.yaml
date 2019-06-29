@@ -1,61 +1,21 @@
 logging:
   level:
     ROOT: INFO
-    web: DEBUG
+    web: INFO
+
+    # application
+    jupyter.catalog: INFO
 
 spring:
   application:
-    name: Gateway
+    name: Catalog
 
   main:
     allow-bean-definition-overriding: true
 
   profiles:
     active: local
-
-  flyway:
-    enabled: false
-
-spring.autoconfigure.exclude:
-  - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
-  - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-  - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
-
-spring.security:
-  user:
-    name: ${SYSTEM_USERNAME:system}
-    password: ${SYSTEM_PASSWORD:system}
-    roles: SYSTEM
-
-#
-# spring actuactor
-#
-management:
-  endpoints:
-    web:
-      base-path: /management
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: "ALWAYS"
-    metrics:
-      enabled: true
-    prometheus:
-      enabled: true
-  # https://dzone.com/articles/monitoring-using-spring-boot-2-prometheus-and-graf
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-  info:
-    git:
-      mode: full
-  health:
-    defaults:
-      enabled: true
-    mail:
-      enabled: false
+    include: jdbc-local
 
 #
 # server

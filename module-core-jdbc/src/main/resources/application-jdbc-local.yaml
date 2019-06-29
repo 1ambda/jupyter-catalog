@@ -1,0 +1,70 @@
+# debug: true
+
+spring:
+  profiles:
+    include: jdbc
+
+    # application
+    jupyter.core.jdbc: DEBUG
+
+    # JPA
+    org.hibernate.SQL: DEBUG                                    # hibernate
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE        # hibernate
+
+    org.springframework.transaction: DEBUG                      # transaction
+    org.springframework.orm.jpa: DEBUG                          # transaction
+
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG           # JDBC
+    org.springframework.jdbc.core.StatementCreatorUtils: TRACE  # JDBC
+
+    # security
+    org.springframework.security: INFO
+
+spring.jpa.show-sql: false # Use logger output instead
+spring.jpa.properties.hibernate.format_sql: true
+spring.jpa.properties.hibernate.generate_statistics: false
+spring.jpa.properties.hibernate.type: TRACE
+
+#
+# spring.flyway
+#
+spring.flyway:
+  baseline-on-migrate: true
+  table: FlywaySchema_Core
+  enabled: true
+  check-location: true
+  locations: classpath:/db/migration/schema,classpath:/db/migration/data-mysql
+
+#
+# spring.jpa
+#
+spring.jpa:
+  datasource:
+    hub:
+      jdbcUrl: jdbc:mysql://${DATABASE_HUB_HOST:localhost}:${DATABASE_HUB_PORT:3306}/${DATABASE_HUB_NAME:application}?useUnicode=yes&characterEncoding=UTF-8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: ${DATABASE_HUB_USERNAME:root}
+      password: ${DATABASE_HUB_PASSWORD:root}
+
+  database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  database: MYSQL
+  open-in-view: false # https://billykorando.com/2019/04/25/wiring-multiple-datasources-in-a-spring-boot-and-spring-data-jpa-application/
+  generate-ddl: true
+
+#
+# spring.autoconfigure
+#
+spring.autoconfigure.exclude:
+  - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+  - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+#
+# spring.security
+#
+spring.security:
+  user:
+    name: ${SYSTEM_USERNAME:system}
+    password: ${SYSTEM_PASSWORD:system}
+    roles: SYSTEM
+

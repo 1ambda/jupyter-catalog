@@ -16,11 +16,6 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "`User`",
-       indexes = {
-         @Index(name = "`idx_User_createdAt`", columnList = "`created_at`", unique = false),
-         @Index(name = "`idx_User_deletedAt`", columnList = "`deleted_at`", unique = false),
-         @Index(name = "`idx_User_locked`", columnList = "`locked`", unique = false),
-       },
        uniqueConstraints = {
          @UniqueConstraint(name = "`uniq_User_email`", columnNames = {"email"}),
        })

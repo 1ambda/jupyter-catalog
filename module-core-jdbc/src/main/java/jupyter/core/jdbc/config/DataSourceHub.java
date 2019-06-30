@@ -1,8 +1,8 @@
 package jupyter.core.jdbc.config;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
-import org.hibernate.dialect.MySQL5Dialect;
+import jupyter.common.profile.ProfileManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -10,6 +10,7 @@ import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,7 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -28,33 +31,60 @@ import java.util.Map;
         transactionManagerRef = "transactionManager"
 )
 @EnableTransactionManagement
-public class DataSourceHubConfig {
+public class DataSourceHub {
+
+    @Autowired
+    private Environment environment;
 
     @Primary
     @Bean(name = "hubDataSource")
-    @ConfigurationProperties("spring.jpa.datasource.hub")
+    @ConfigurationProperties("datasource.hub.connection")
     public DataSource dataSource() {
+        List<String> profiles = Arrays.asList(environment.getActiveProfiles());
+
+        if (profiles.contains(ProfileManager.PROFILE_TEST_UNIT)) {
+            return DataSourceBuilder.create().build();
+        }
+
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
-    public Map<String, Object> jpaProperties() {
+    @Bean(name = "hubDataSourceProps")
+    @ConfigurationProperties("datasource.hub.properties")
+    public DataSourceHubProps dataSourceHubProps() {
+        return new DataSourceHubProps();
+    }
+
+    @Bean(name = "hubJpaProperties")
+    public Map<String, Object> hubJpaProperties(DataSourceHubProps hubProps) {
+
         Map<String, Object> props = new HashMap<>();
 
         // Dialect
-        props.put("hibernate.dialect", MySQL5Dialect.class.getName());
+        props.put("hibernate.dialect", hubProps.getHibernateDialect());
 
         // Naming Strategy
-        props.put("hibernate.physical_naming_strategy", PhysicalNamingStrategyStandardImpl.class.getName());
-        // props.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
+        props.put("hibernate.physical_naming_strategy",
+                hubProps.getHibernatePhysicalNamingStrategy());
+        // props.put("hibernate.implicit_naming_strategy",
+        //      hubProps.getHibernatePhysicalNamingStrategy());
 
         // DDL Generation
-        props.put("hibernate.id.new_generator_mappings", "false");
+        props.put("hibernate.hbm2ddl.auto", hubProps.getHibernateHbm2ddlAuto());
+        props.put("hibernate.id.new_generator_mappings", hubProps.getHibernateIdNewGeneratorMappings());
 
         // other performance-related options
-        props.put("hibernate.connection.provider_disables_autocommit", "true");
-        props.put("hibernate.cache.use_second_level_cache", "false");
-        props.put("hibernate.cache.use_query_cache", "false");
-        props.put("hibernate.generate_statistics", "false");
+        props.put("hibernate.connection.provider_disables_autocommit",
+                hubProps.getHibernateConnectionProviderDisablesAutocommit());
+        props.put("hibernate.cache.use_second_level_cache",
+                hubProps.getHibernateCacheUseSecondLevelCache());
+        props.put("hibernate.cache.use_query_cache",
+                hubProps.getHibernateCacheUseQueryCache());
+
+        // logging
+        props.put("hibernate.format_sql", hubProps.getHibernateFormatSql());
+        props.put("hibernate.generate_statistics", hubProps.getHibernateGenerateStatistics());
+        props.put("hibernate.type", hubProps.getHibernateType());
 
         return props;
     }
@@ -65,11 +95,14 @@ public class DataSourceHubConfig {
             EntityManagerFactoryBuilder builder,
             @Qualifier("hubDataSource") DataSource dataSource) {
 
+        DataSourceHubProps hubProps = dataSourceHubProps();
+        Map<String, Object> jpaProperties = hubJpaProperties(hubProps);
+
         return builder
                 .dataSource(dataSource)
                 .packages("jupyter.core.jdbc.domain.hub")
                 .persistenceUnit("hub")
-                .properties(jpaProperties())
+                .properties(jpaProperties)
                 .build();
     }
 

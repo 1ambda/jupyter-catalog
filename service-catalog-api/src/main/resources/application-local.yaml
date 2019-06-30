@@ -8,7 +8,7 @@ logging:
 
 spring:
   profiles:
-    include: jdbc-local
+    include: jdbc-env-local
 
 #
 # spring actuactor

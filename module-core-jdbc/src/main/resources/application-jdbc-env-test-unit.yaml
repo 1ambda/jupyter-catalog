@@ -1,0 +1,87 @@
+# debug: true
+logging:
+  level:
+    ROOT: INFO
+    web: DEBUG
+
+    # application
+    jupyter.core.jdbc: DEBUG
+
+    # JPA
+    org.hibernate.SQL: DEBUG                                    # hibernate
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE        # hibernate
+
+    org.springframework.transaction: DEBUG                      # transaction
+    org.springframework.orm.jpa: DEBUG                          # transaction
+
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG           # JDBC
+    org.springframework.jdbc.core.StatementCreatorUtils: TRACE  # JDBC
+
+    com.zaxxer.hikari: DEBUG                                    # hikari
+
+    # security
+    org.springframework.security: INFO
+
+spring:
+  profiles:
+    include: jdbc
+
+#
+# spring.flyway
+#
+spring.flyway:
+  enabled: false
+
+#
+# spring.jpa
+#
+spring.jpa:
+  database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  database: H2
+  open-in-view: false # https://billykorando.com/2019/04/25/wiring-multiple-datasources-in-a-spring-boot-and-spring-data-jpa-application/
+  generate-ddl: true
+  show-sql: false # Use logger output instead
+
+spring.h2:
+  console:
+    enabled: true
+    path: /h2-console
+
+datasource:
+  hub:
+    connection:
+      jdbcUrl: jdbc:h2:mem:application;DB_CLOSE_DELAY=-1;MODE=MYSQL;
+      username: sa
+      password: sa
+
+    properties:
+      hibernateDialect: org.hibernate.dialect.H2Dialect
+      hibernatePhysicalNamingStrategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      hibernateHbm2ddlAuto: update
+      hibernateIdNewGeneratorMappings: false
+
+      hibernateConnectionProviderDisablesAutocommit: true
+      hibernateCacheUseSecondLevelCache: false
+      hibernateCacheUseQueryCache: false
+
+      hibernateFormatSql: false
+      hibernateGenerateStatistics: false
+      hibernateType: TRACE
+
+#
+# spring.autoconfigure
+#
+spring.autoconfigure.exclude:
+  - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+  - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+#
+# spring.security
+#
+spring.security:
+  user:
+    name: ${SYSTEM_USERNAME:system}
+    password: ${SYSTEM_PASSWORD:system}
+    roles: SYSTEM
+

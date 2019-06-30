@@ -1,8 +1,6 @@
-# debug: true
-
-spring:
-  profiles:
-    include: jdbc
+logging:
+  level:
+    ROOT: INFO
 
     # application
     jupyter.core.jdbc: DEBUG
@@ -10,6 +8,8 @@ spring:
     # JPA
     org.hibernate.SQL: DEBUG                                    # hibernate
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE        # hibernate
+
+    # com.zaxxer.hikari: DEBUG                                    # hikari
 
     org.springframework.transaction: DEBUG                      # transaction
     org.springframework.orm.jpa: DEBUG                          # transaction
@@ -20,10 +20,10 @@ spring:
     # security
     org.springframework.security: INFO
 
-spring.jpa.show-sql: false # Use logger output instead
-spring.jpa.properties.hibernate.format_sql: true
-spring.jpa.properties.hibernate.generate_statistics: false
-spring.jpa.properties.hibernate.type: TRACE
+spring:
+  profiles:
+    include: jdbc
+
 
 #
 # spring.flyway
@@ -33,23 +33,49 @@ spring.flyway:
   table: FlywaySchema_Core
   enabled: true
   check-location: true
-  locations: classpath:/db/migration/schema,classpath:/db/migration/data-mysql
+  locations: classpath:/db/migration/schema,classpath:/db/data-mysql
 
 #
 # spring.jpa
 #
 spring.jpa:
-  datasource:
-    hub:
-      jdbcUrl: jdbc:mysql://${DATABASE_HUB_HOST:localhost}:${DATABASE_HUB_PORT:3306}/${DATABASE_HUB_NAME:application}?useUnicode=yes&characterEncoding=UTF-8
-      driverClassName: com.mysql.cj.jdbc.Driver
-      username: ${DATABASE_HUB_USERNAME:root}
-      password: ${DATABASE_HUB_PASSWORD:root}
 
   database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   database: MYSQL
   open-in-view: false # https://billykorando.com/2019/04/25/wiring-multiple-datasources-in-a-spring-boot-and-spring-data-jpa-application/
   generate-ddl: true
+  show-sql: false # Use logger output instead
+
+datasource:
+  hub:
+    connection:
+      jdbcUrl: jdbc:mysql://${DATABASE_HUB_HOST:localhost}:${DATABASE_HUB_PORT:3306}/${DATABASE_HUB_NAME:application}?useUnicode=yes&characterEncoding=UTF-8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: ${DATABASE_HUB_USERNAME:root}
+      password: ${DATABASE_HUB_PASSWORD:root}
+
+      autoCommit: false
+      poolName: HikariPool-Hub
+
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+    properties:
+      hibernateDialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernatePhysicalNamingStrategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      hibernateHbm2ddlAuto: validate
+      hibernateIdNewGeneratorMappings: false
+
+      hibernateConnectionProviderDisablesAutocommit: true
+      hibernateCacheUseSecondLevelCache: false
+      hibernateCacheUseQueryCache: false
+
+      hibernateFormatSql: false
+      hibernateGenerateStatistics: false
+      hibernateType: TRACE
 
 #
 # spring.autoconfigure

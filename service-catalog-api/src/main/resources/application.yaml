@@ -15,7 +15,7 @@ spring:
 
   profiles:
     active: local
-    include: jdbc-local
+    include:
 
 #
 # server

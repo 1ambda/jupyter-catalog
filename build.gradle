@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.5.RELEASE'
+        springBootVersion = '2.1.6.RELEASE'
         gradleAptVersion = '0.19'
         owaspVersion = '3.3.1'
         queryDslPluginVersion = '1.0.10'

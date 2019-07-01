@@ -14,11 +14,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(
-        name = "`RoleToUser`",
-        indexes = {
-                @Index(name = "`idx_RoleToUser_createdAt`", columnList = "`created_at`", unique = false),
-                @Index(name = "`idx_RoleToUser_deletedAt`", columnList = "`deleted_at`", unique = false),
-        }
+        name = "`RoleToUser`"
 )
 public class RoleToUser extends BaseEntity {
     @ToString.Exclude

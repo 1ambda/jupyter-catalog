@@ -8,7 +8,8 @@ dependencies {
 
     // swagger-client
     compile("javax.validation:validation-api:${javaxValidationVersion}")
-    compile("io.swagger:swagger-annotations:${swaggerAnnotationVersion}")
+    compile("io.swagger.core.v3:swagger-annotations:${swagger3AnnotationVersion}")
+
     compile "io.github.openfeign:feign-core:${feignVersion}"
     compile "io.github.openfeign:feign-jackson:${feignVersion}"
     compile "io.github.openfeign:feign-slf4j:${feignVersion}"

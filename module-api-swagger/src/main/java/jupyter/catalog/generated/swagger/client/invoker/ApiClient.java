@@ -20,12 +20,11 @@ import feign.slf4j.Slf4jLogger;
 import jupyter.catalog.generated.swagger.client.invoker.auth.*;
 import jupyter.catalog.generated.swagger.client.invoker.auth.OAuth.AccessTokenListener;
 
-
 public class ApiClient {
   public interface Api {}
 
   protected ObjectMapper objectMapper;
-  private String basePath = "http://localhost/api";
+  private String basePath = "/";
   private Map<String, RequestInterceptor> apiAuthorizations;
   private Feign.Builder feignBuilder;
 

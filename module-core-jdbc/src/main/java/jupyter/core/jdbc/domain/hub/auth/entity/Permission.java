@@ -25,27 +25,24 @@ import java.util.List;
 public class Permission extends BaseAuditEntity {
     public enum Code {
 
+
         /**
-         * for ADMIN ROLE
+         * for SPECIFIC PERMISSION
+         */
+        PERM_NOTEBOOK_READ("PERM_NOTEBOOK_READ"),
+        PERM_NOTEBOOK_UPDATE("PERM_NOTEBOOK_UPDATE"),
+        PERM_NOTEBOOK_CREATE("PERM_NOTEBOOK_CREATE"),
+        PERM_NOTEBOOK_DELETE("PERM_NOTEBOOK_DELETE"),
+
+        /**
+         * for ADMIN PERMISSION
          */
         PERM_BYPASS("PERM_BYPASS"),
 
         /**
-         * for USER BASIC ROLE
+         * for USER BASIC PERMISSION
          */
-        PERM_SETTING("PERM_SETTING"),
-
-        /**
-         * for SPECIFIC ROLE
-         */
-        PERM_DATA_PRICE_READ("PERM_DATA_PRICE_READ"),
-        PERM_DATA_LEISURE_READ("PERM_DATA_LEISURE_READ"),
-        PERM_DATA_SELLER_READ("PERM_DATA_SELLER_READ"),
-        PERM_DATA_SEARCH_READ("PERM_DATA_SEARCH_READ"),
-        PERM_DATA_EXPERIMENT_READ("PERM_DATA_EXPERIMENT_READ"),
-        PERM_DATA_REPORT_READ("PERM_DATA_REPORT_READ"),
-        PERM_MANAGE_ACCOUNT_ALL("PERM_MANAGE_ACCOUNT_ALL"),
-        PERM_INVALID("PERM_INVALID");
+        PERM_SETTING("PERM_SETTING");
 
         private String value;
 

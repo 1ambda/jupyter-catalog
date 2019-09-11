@@ -1,0 +1,21 @@
+openapi: "3.0.0"
+
+info:
+  version: 0.0.1
+  title: Notebook
+
+schemes:
+  - http
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+# basePath: /api
+
+paths:
+
+  # Auth API
+  /auth/whoiam:
+    $ref: "./catalog-auth-api.yaml#/api/whoami"

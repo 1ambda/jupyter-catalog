@@ -25,6 +25,7 @@ dependencies {
     // swagger-springfox
     compile("io.springfox:springfox-swagger2:${springfoxVersion}")
     compile("io.springfox:springfox-swagger-ui:${springfoxVersion}")
+    compile("io.swagger:swagger-annotations:${swagger2AnnotationVersion}")
 
     // structured logging
     compile("net.logstash.logback:logstash-logback-encoder:${logbackEncoderVersion}")

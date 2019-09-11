@@ -1,0 +1,44 @@
+api:
+  whoami:
+    get:
+      tags:
+        - auth-controller
+      operationId: whoami
+      parameters:
+      responses:
+        '200':
+          description: OK
+          headaers:
+          content:
+            application/json:
+              schema:
+                $ref: "./catalog-auth-model.yaml#/components/schemas/UserDTO"
+
+        default:
+          description: Error
+          headaers:
+          content:
+            application/json:
+              schema:
+                $ref: "./common.yaml#/components/schemas/Failure"
+
+#        400:
+#          description: Bad Request
+#          schema:
+#            $ref: "./common.yaml#/definitions/"
+#        401:
+#          description: Unauthorized
+#          schema:
+#            $ref: "./common.yaml#/definitions/Failure"
+#        403:
+#          description: Forbidden
+#          schema:
+#            $ref: "./common.yaml#/definitions/Failure"
+#        404:
+#          description: Not Found
+#          schema:
+#            $ref: "./common.yaml#/definitions/Failure"
+#        500:
+#          description: Internal Server Error
+#          schema:
+#            $ref: "./common.yaml#/definitions/Failure"

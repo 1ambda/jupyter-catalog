@@ -6,7 +6,8 @@ DOCKER_HOST_IP := $(shell ipconfig getifaddr en0)
 VCS = github.com
 REPOSITORY = "1ambda/jupyter-catalog"
 
-SWAGGER_CODEGEN_VERSION = 2.4.5
+# SWAGGER_CODEGEN_VERSION = 2.4.5
+SWAGGER_CODEGEN_VERSION = 3.0.11
 
 ##
 ## Tool
@@ -15,7 +16,8 @@ SWAGGER_CODEGEN_VERSION = 2.4.5
 .PHONY: install.tool
 install.tool:
 	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Installing prerequisites"
-	@ wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VERSION)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VERSION).jar -O script/swagger-codegen/swagger-codegen-cli.jar
+	# @ wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VERSION)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VERSION).jar -O script/swagger-codegen/swagger-codegen-cli.jar
+	@ wget https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/$(SWAGGER_CODEGEN_VERSION)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VERSION).jar -O script/swagger-codegen/swagger-codegen-cli.jar
 
 #	@ pip install mycli
 #	@ go get -u -v github.com/holys/redis-cli

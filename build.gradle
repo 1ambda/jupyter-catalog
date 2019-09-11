@@ -20,19 +20,8 @@ buildscript {
         jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://repo.spring.io/plugins-release' }
-        maven {
-            name "typesafe-maven-release"
-            url "https://repo.typesafe.com/typesafe/maven-releases"
-        }
-        maven {
-            name "Spark Packages Repo"
-            url "http://dl.bintray.com/spark-packages/maven"
-        }
-        ivy {
-            name "typesafe-ivy-release"
-            url "https://repo.typesafe.com/typesafe/ivy-releases"
-            layout "ivy"
-        }
+        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+
     }
 
     dependencies {
@@ -85,12 +74,13 @@ allprojects {
 
     ext {
         // :module-api-swagger
-        swaggerAnnotationVersion = '1.5.21'
+        swagger2AnnotationVersion = '1.5.23'
+        swagger3AnnotationVersion = '2.0.9'
         jacksonJsr310Version = '2.9.7'
 
         feignVersion = '9.7.0'
         feignFormVersion = '3.8.0'
-        oltuVersion = '1.0.1'
+        oltuVersion = '1.0.2'
         migbase64Version = '2.2'
 
         // common

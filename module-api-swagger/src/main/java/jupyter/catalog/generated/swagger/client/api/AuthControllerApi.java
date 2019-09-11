@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.Map;
 import feign.*;
 
-
 public interface AuthControllerApi extends ApiClient.Api {
-
 
   /**
    * 
@@ -23,7 +21,7 @@ public interface AuthControllerApi extends ApiClient.Api {
    */
   @RequestLine("GET /auth/whoiam")
   @Headers({
-    "Accept: application/json",
+      "Accept: application/json",
   })
   UserDTO whoami();
 }

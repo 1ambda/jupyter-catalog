@@ -9,7 +9,7 @@ REPOSITORY = 1ambda/jupyter-catalog
 MODULE = service-catalog-api
 PACKAGE = "jupyter/catalog/generated"
 
-SWAGGER_DIR = ../schema/swagger
+SWAGGER_DIR = ../schema/swagger3
 SWAGGER_TEMPLATE_DIR = "${SWAGGER_DIR}/template-model-java"
 SWAGGER_SCHEMA = "$(SWAGGER_DIR)/catalog-entrypoint.yaml"
 SWAGGER_SERVER_CONFIG = "$(SWAGGER_DIR)/config.catalog-server-java.json"
@@ -35,7 +35,8 @@ swagger.server:
 	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Started: generating swagger server files (CATALOG)"
 	@ echo "-----------------------------------------\n"
 
-	@ java -jar $(SWAGGER_CODEGEN_JAR) generate -l spring -i $(SWAGGER_SCHEMA) -c $(SWAGGER_SERVER_CONFIG) -t $(SWAGGER_TEMPLATE_DIR) -o .
+	@ java -jar $(SWAGGER_CODEGEN_JAR) generate -l spring -i $(SWAGGER_SCHEMA) -c $(SWAGGER_SERVER_CONFIG) \
+		-o .
 	rm -rf $(SWAGGER_SERVER_OUTPUT_DIR)/model
 	rm -rf $(SWAGGER_SERVER_OUTPUT_TEMP_DIR)
 

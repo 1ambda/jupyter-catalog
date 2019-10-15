@@ -59,3 +59,69 @@ definitions:
       isLocked:
         type: string
         description: Y / N
+
+
+  Provider2:
+    type: string
+    enum: &PROVIDER
+      - PASSWORD
+      - LDAP
+      - OAUTH_GOOGLE
+
+  UserDTO2:
+    type: object
+    required:
+      - "id"
+      - "password"
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Auto-generated ID for User
+      sex:
+        type: string
+      userName:
+        type: string
+      password:
+        type: string
+      provider:
+        $ref: "./catalog-auth-model.yaml#/definitions/Provider2"
+      displayName:
+        type: string
+      email:
+        type: string
+      department:
+        type: string
+      imageUrl:
+        type: string
+      roles:
+        type: array
+        items:
+          type: string
+      permissions:
+        type: array
+        items:
+          type: string
+      createdBy:
+        type: integer
+        format: int64
+        description: Epoch Millis (UTC)
+      modifiedBy:
+        type: integer
+        format: int64
+        description: Epoch Millis (UTC)
+      createdAt:
+        type: integer
+        format: int64
+        description: Epoch Millis (UTC)
+      modifiedAt:
+        type: integer
+        format: int64
+        description: Epoch Millis (UTC)
+      recentlyLoggedIn:
+        type: integer
+        format: int64
+        description: Epoch Millis (UTC)
+      isLocked:
+        type: string
+        description: Y / N

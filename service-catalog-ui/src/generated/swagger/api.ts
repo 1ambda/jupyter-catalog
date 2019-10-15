@@ -148,6 +148,17 @@ export enum Provider {
 /**
  * 
  * @export
+ * @enum {string}
+ */
+export enum Provider2 {
+    PASSWORD = <any> 'PASSWORD',
+    LDAP = <any> 'LDAP',
+    OAUTHGOOGLE = <any> 'OAUTH_GOOGLE'
+}
+
+/**
+ * 
+ * @export
  * @interface RenderedNotebookDTO
  */
 export interface RenderedNotebookDTO {
@@ -269,6 +280,116 @@ export interface UserDTO {
     isLocked?: string;
 }
 
+/**
+ * 
+ * @export
+ * @interface UserDTO2
+ */
+export interface UserDTO2 {
+    /**
+     * Auto-generated ID for User
+     * @type {number}
+     * @memberof UserDTO2
+     */
+    id: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    sex?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    userName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    password: string;
+    /**
+     * 
+     * @type {Provider2}
+     * @memberof UserDTO2
+     */
+    provider?: Provider2;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    displayName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    department?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    imageUrl?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UserDTO2
+     */
+    roles?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UserDTO2
+     */
+    permissions?: Array<string>;
+    /**
+     * Epoch Millis (UTC)
+     * @type {number}
+     * @memberof UserDTO2
+     */
+    createdBy?: number;
+    /**
+     * Epoch Millis (UTC)
+     * @type {number}
+     * @memberof UserDTO2
+     */
+    modifiedBy?: number;
+    /**
+     * Epoch Millis (UTC)
+     * @type {number}
+     * @memberof UserDTO2
+     */
+    createdAt?: number;
+    /**
+     * Epoch Millis (UTC)
+     * @type {number}
+     * @memberof UserDTO2
+     */
+    modifiedAt?: number;
+    /**
+     * Epoch Millis (UTC)
+     * @type {number}
+     * @memberof UserDTO2
+     */
+    recentlyLoggedIn?: number;
+    /**
+     * Y / N
+     * @type {string}
+     * @memberof UserDTO2
+     */
+    isLocked?: string;
+}
+
 
 /**
  * AuthControllerApi - fetch parameter creator
@@ -278,11 +399,56 @@ export const AuthControllerApiFetchParamCreator = function (configuration?: Conf
     return {
         /**
          * 
+         * @summary Regist user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authRegisterUserPost(options: any = {}): FetchArgs {
+            const localVarPath = `/auth/registerUser`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         whoami(options: any = {}): FetchArgs {
             const localVarPath = `/auth/whoiam`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        whoami2(options: any = {}): FetchArgs {
+            const localVarPath = `/auth/whoiam2`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
@@ -309,11 +475,46 @@ export const AuthControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Regist user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authRegisterUserPost(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserDTO2> {
+            const localVarFetchArgs = AuthControllerApiFetchParamCreator(configuration).authRegisterUserPost(options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         whoami(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserDTO> {
             const localVarFetchArgs = AuthControllerApiFetchParamCreator(configuration).whoami(options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        whoami2(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserDTO2> {
+            const localVarFetchArgs = AuthControllerApiFetchParamCreator(configuration).whoami2(options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -335,11 +536,28 @@ export const AuthControllerApiFactory = function (configuration?: Configuration,
     return {
         /**
          * 
+         * @summary Regist user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authRegisterUserPost(options?: any) {
+            return AuthControllerApiFp(configuration).authRegisterUserPost(options)(fetch, basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         whoami(options?: any) {
             return AuthControllerApiFp(configuration).whoami(options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        whoami2(options?: any) {
+            return AuthControllerApiFp(configuration).whoami2(options)(fetch, basePath);
         },
     };
 };
@@ -353,12 +571,33 @@ export const AuthControllerApiFactory = function (configuration?: Configuration,
 export class AuthControllerApi extends BaseAPI {
     /**
      * 
+     * @summary Regist user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApi
+     */
+    public authRegisterUserPost(options?: any) {
+        return AuthControllerApiFp(this.configuration).authRegisterUserPost(options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthControllerApi
      */
     public whoami(options?: any) {
         return AuthControllerApiFp(this.configuration).whoami(options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApi
+     */
+    public whoami2(options?: any) {
+        return AuthControllerApiFp(this.configuration).whoami2(options)(this.fetch, this.basePath);
     }
 
 }

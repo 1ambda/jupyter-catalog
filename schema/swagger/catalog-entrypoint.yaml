@@ -17,6 +17,12 @@ paths:
   # Auth API
   /auth/whoiam:
     $ref: "./catalog-auth-api.yaml#/api/whoami"
+  /auth/whoiam2:
+    $ref: "./catalog-auth-api.yaml#/api/whoami2"
+
+  /auth/registerUser:
+    $ref: "./catalog-auth-api.yaml#/api/registerUser"
+
 
   # Notebook API
   /notebook/display:

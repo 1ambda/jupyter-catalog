@@ -7,6 +7,7 @@ package jupyter.catalog.generated.swagger.server.api;
 
 import jupyter.catalog.generated.swagger.model.Failure;
 import jupyter.catalog.generated.swagger.model.UserDTO;
+import jupyter.catalog.generated.swagger.model.UserDTO2;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -47,6 +48,35 @@ public interface AuthControllerApi {
         return getRequest().map(r -> r.getHeader("Accept"));
     }
 
+    @ApiOperation(value = "Regist user", nickname = "authRegisterUserPost", notes = "", response = UserDTO2.class, tags={ "auth-controller", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = UserDTO2.class),
+        @ApiResponse(code = 400, message = "Bad Request", response = Failure.class),
+        @ApiResponse(code = 401, message = "Unauthorized", response = Failure.class),
+        @ApiResponse(code = 403, message = "Forbidden", response = Failure.class),
+        @ApiResponse(code = 404, message = "Not Found", response = Failure.class),
+        @ApiResponse(code = 500, message = "Internal Server Error", response = Failure.class) })
+    @RequestMapping(value = "/auth/registerUser",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.POST)
+    default ResponseEntity<UserDTO2> authRegisterUserPost() {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"displayName\" : \"displayName\",  \"modifiedAt\" : 5,  \"sex\" : \"sex\",  \"roles\" : [ \"roles\", \"roles\" ],  \"userName\" : \"userName\",  \"createdAt\" : 5,  \"password\" : \"password\",  \"provider\" : { },  \"createdBy\" : 6,  \"permissions\" : [ \"permissions\", \"permissions\" ],  \"imageUrl\" : \"imageUrl\",  \"isLocked\" : \"isLocked\",  \"modifiedBy\" : 1,  \"id\" : 0,  \"department\" : \"department\",  \"email\" : \"email\",  \"recentlyLoggedIn\" : 2}", UserDTO2.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default AuthControllerApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
     @ApiOperation(value = "", nickname = "whoami", notes = "", response = UserDTO.class, tags={ "auth-controller", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = UserDTO.class),
@@ -63,6 +93,34 @@ public interface AuthControllerApi {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
                     return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"displayName\" : \"displayName\",  \"modifiedAt\" : 5,  \"roles\" : [ \"roles\", \"roles\" ],  \"userName\" : \"userName\",  \"createdAt\" : 5,  \"password\" : \"password\",  \"provider\" : { },  \"createdBy\" : 6,  \"permissions\" : [ \"permissions\", \"permissions\" ],  \"imageUrl\" : \"imageUrl\",  \"isLocked\" : \"isLocked\",  \"modifiedBy\" : 1,  \"id\" : 0,  \"department\" : \"department\",  \"email\" : \"email\",  \"recentlyLoggedIn\" : 2}", UserDTO.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default AuthControllerApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "", nickname = "whoami2", notes = "", response = UserDTO2.class, tags={ "auth-controller", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = UserDTO2.class),
+        @ApiResponse(code = 400, message = "Bad Request", response = Failure.class),
+        @ApiResponse(code = 401, message = "Unauthorized", response = Failure.class),
+        @ApiResponse(code = 403, message = "Forbidden", response = Failure.class),
+        @ApiResponse(code = 404, message = "Not Found", response = Failure.class),
+        @ApiResponse(code = 500, message = "Internal Server Error", response = Failure.class) })
+    @RequestMapping(value = "/auth/whoiam2",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    default ResponseEntity<UserDTO2> whoami2() {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"displayName\" : \"displayName\",  \"modifiedAt\" : 5,  \"sex\" : \"sex\",  \"roles\" : [ \"roles\", \"roles\" ],  \"userName\" : \"userName\",  \"createdAt\" : 5,  \"password\" : \"password\",  \"provider\" : { },  \"createdBy\" : 6,  \"permissions\" : [ \"permissions\", \"permissions\" ],  \"imageUrl\" : \"imageUrl\",  \"isLocked\" : \"isLocked\",  \"modifiedBy\" : 1,  \"id\" : 0,  \"department\" : \"department\",  \"email\" : \"email\",  \"recentlyLoggedIn\" : 2}", UserDTO2.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

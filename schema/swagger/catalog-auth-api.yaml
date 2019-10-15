@@ -32,3 +32,89 @@ api:
           description: Internal Server Error
           schema:
             $ref: "./common.yaml#/definitions/Failure"
+
+  whoami2:
+    get:
+      tags:
+        - auth-controller
+      operationId: whoami2
+      consumes: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "./catalog-auth-model.yaml#/definitions/UserDTO2"
+        400:
+          description: Bad Request
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        404:
+          description: Not Found
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+
+
+  registerUser:
+    post:
+      summary: Regist user
+      tags:
+        - auth-controller
+      requestBody:
+        description: desc
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./catalog-auth-model.yaml#/definitions/UserDTO2"
+            example:
+              id: 407918
+
+          text/plain:
+            schema:
+              type: string
+
+        response:
+          '201':
+            description: Created
+
+
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "./catalog-auth-model.yaml#/definitions/UserDTO2"
+        400:
+          description: Bad Request
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        404:
+          description: Not Found
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "./common.yaml#/definitions/Failure"

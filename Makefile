@@ -6,7 +6,7 @@ DOCKER_HOST_IP := $(shell ipconfig getifaddr en0)
 VCS = github.com
 REPOSITORY = "1ambda/jupyter-catalog"
 
-SWAGGER_CODEGEN_VERSION = 2.4.5
+SWAGGER_CODEGEN_VERSION = 2.4.8
 
 ##
 ## Tool
@@ -51,8 +51,8 @@ compose.prepare:
 	@ echo "\n-----------------------------------------"
 	@ echo ""
 
-.PHONY: compose
-compose: compose.prepare
+.PHONY: compose.storage
+compose.storage: compose.prepare
 	@ echo "[$(TAG)] ($(shell date '+%H:%M:%S')) - Running docker-compose"
 	@ docker stop $(docker ps -a -q) || true
 	@ docker rm -f $(docker ps -a -q) || true
@@ -76,6 +76,9 @@ compose.clean:
 	@ rm -rf metastore_db
 	@ echo "\n-----------------------------------------"
 	@ echo "[$(TAG)] ($(shell TZ=UTC date -u '+%H:%M:%S')) - Finished: Cleaning docker resources"
+
+.PHONY: compose
+compose: compose.clean compose.storage
 
 ##
 ## CLI
